@@ -1,0 +1,32 @@
+# Copyright (c) 2023, Quincy.W <wangqyfm@foxmail.com>
+# SPDX-License-Identifier: Apache-2.0
+
+menuconfig GPIO_APM32
+	bool "GPIO Driver for APM32 family of MCUs"
+    default y
+	depends on SOC_FAMILY_APM32
+	select APM32_HAL_GPIO
+	help
+	  Enable GPIO driver for APM32 MCUs
+
+if GPIO_APM32
+
+choice GPIO_APM32_SWJ
+	prompt "Serial wire JTAG configuration"
+	depends on SOC_SERIES_APM32F1X
+
+config GPIO_APM32_SWJ_ENABLE
+	bool "Full SWJ (JTAG-DP + SW-DP): Reset State"
+
+config GPIO_APM32_SWJ_NONJTRST
+	bool "Full SWJ (JTAG-DP + SW-DP) but without NJTRST"
+
+config GPIO_APM32_SWJ_NOJTAG
+	bool "JTAG-DP Disabled and SW-DP Enabled"
+
+config GPIO_APM32_SWJ_DISABLE
+	bool "JTAG-DP Disabled and SW-DP Disabled"
+
+endchoice
+
+endif # GPIO_APM32

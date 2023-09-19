@@ -1,0 +1,17 @@
+# Copyright (c) 2023, Quincy.W <wangqyfm@foxmail.com>
+# SPDX-License-Identifier: Apache-2.0
+
+config SOC_FAMILY_APM32
+	bool
+	select BUILD_OUTPUT_HEX
+	select APM32_HAL_LIBRARY
+
+if SOC_FAMILY_APM32
+
+config SOC_FAMILY
+	string
+	default "geehy_apm32"
+
+rsource "./*/Kconfig.soc"
+
+endif # SOC_FAMILY_APM32

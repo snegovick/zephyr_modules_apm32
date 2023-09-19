@@ -1,0 +1,13 @@
+# Copyright (c) 2023, Quincy.W <wangqyfm@foxmail.com>
+# SPDX-License-Identifier: Apache-2.0
+
+menuconfig CLOCK_CTRL_APM32
+	bool "CLOCK_CTRL Driver for APM32 family of MCUs"
+	default y
+	depends on SOC_FAMILY_APM32
+	help
+	  Enable CLOCK_CTRL driver for APM32 MCUs
+
+if CLOCK_CTRL_APM32
+	
+endif # CLOCK_CTRL_APM32

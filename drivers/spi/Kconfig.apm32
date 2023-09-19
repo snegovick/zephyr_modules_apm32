@@ -1,0 +1,9 @@
+# Copyright (c) 2023, Quincy.W <wangqyfm@foxmail.com>
+# SPDX-License-Identifier: Apache-2.0
+
+menuconfig SPI_APM32
+	bool "SPI Driver for APM32 family of MCUs"
+	select USE_NS_STD_LIB_SPI
+	depends on SOC_FAMILY_APM32
+	help
+	  Enable SPI driver for APM32 MCUs

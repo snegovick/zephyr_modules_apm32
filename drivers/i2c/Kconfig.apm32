@@ -1,0 +1,13 @@
+# Copyright (c) 2023, Quincy.W <wangqyfm@foxmail.com>
+# SPDX-License-Identifier: Apache-2.0
+
+menuconfig I2C_APM32
+	bool "I2C Driver for APM32 family of MCUs"
+	depends on SOC_FAMILY_APM32
+	select APM32_HAL_I2C
+	help
+	  Enable I2C driver for APM32 MCUs
+
+if I2C_APM32
+
+endif # I2C_APM32

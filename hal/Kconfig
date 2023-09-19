@@ -1,0 +1,82 @@
+# Copyright (c) 2023, Quincy.W <wangqyfm@foxmail.com>
+# SPDX-License-Identifier: Apache-2.0
+
+config APM32_HAL_LIBRARY
+	bool
+	depends on SOC_FAMILY_APM32
+
+if APM32_HAL_LIBRARY
+
+config APM32_HAL_ADC
+    bool 
+
+config APM32_HAL_BAKPR
+    bool 
+
+config APM32_HAL_CAN
+    bool 
+
+config APM32_HAL_CRC
+    bool 
+
+config APM32_HAL_DAC
+    bool 
+
+config APM32_HAL_DBGMCU
+    bool 
+
+config APM32_HAL_DMA
+    bool 
+
+config APM32_HAL_DMC
+    bool 
+
+config APM32_HAL_EINT
+    bool 
+
+config APM32_HAL_FMC
+    bool 
+
+config APM32_HAL_GPIO
+    bool 
+
+config APM32_HAL_I2C
+    bool 
+
+config APM32_HAL_IWDT
+    bool 
+
+# config APM32_HAL_MISC
+#     bool 
+
+config APM32_HAL_PMU
+    bool 
+
+config APM32_HAL_QSPI
+    bool 
+
+config APM32_HAL_RTC
+    bool 
+
+config APM32_HAL_SCI2C
+    bool 
+
+config APM32_HAL_SDIO
+    bool 
+
+config APM32_HAL_SMC
+    bool 
+
+config APM32_HAL_SPI
+    bool 
+
+config APM32_HAL_TMR
+    bool 
+
+config APM32_HAL_USART
+    bool 
+
+config APM32_HAL_WWDT
+    bool 
+
+endif # APM32_HAL_LIBRARY

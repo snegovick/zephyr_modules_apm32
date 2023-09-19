@@ -1,0 +1,22 @@
+/*
+ * Copyright (c) 2023, Quincy.W <wangqyfm@foxmail.com>
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+#include <mem.h>
+#include <geehy/f1/apm32f1.dtsi>
+
+/ {
+	sram0: memory@20000000 {
+		reg = <0x20000000 DT_SIZE_K(20)>;
+	};
+
+	soc {
+		flash-controller@40022000 {
+			flash0: flash@8000000 {
+				reg = <0x08000000 DT_SIZE_K(128)>;
+				erase-block-size = <DT_SIZE_K(1)>;
+			};
+		};
+	};
+};

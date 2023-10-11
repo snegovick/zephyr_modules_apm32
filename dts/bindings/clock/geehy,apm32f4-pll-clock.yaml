@@ -1,0 +1,51 @@
+# Copyright (c) 2023, Quincy.W <wangqyfm@foxmail.com>
+# SPDX-License-Identifier: Apache-2.0
+
+description: |
+    APM32F4 PLL, the frequency can be computed with the following formula:
+
+    f(VCO clock) = f(PLL1 clock input) × ( PLL1A / PLLB )
+    f(PLL1 clock output) = f(VCO clock) / PLL1C
+    f(OTG_FS, SDIO, RNG clock output) = f(VCO clock) / PLLD
+
+compatible: "geehy,apm32f4-pll-clock"
+
+include: [clock-controller.yaml, base.yaml]
+
+properties:
+  "#clock-cells":
+    const: 0
+
+  clocks:
+    required: true
+
+  div-b:
+    type: int
+    required: true
+    description: |
+        Division factor for the PLL input clock
+        Valid range: 2 - 63
+
+  mul-a:
+    type: int
+    required: true
+    description: |
+        Main PLL multiplication factor for VCO
+        Valid range: 50 - 432
+
+  div-c:
+    type: int
+    required: true
+    description: |
+        Main PLL division factor for PLL output
+    enum:
+      - 2
+      - 4
+      - 6
+      - 8
+
+  div-d:
+    type: int
+    description: |
+        Main PLL division factor for USB OTG FS, SDIO and RNG clocks.
+        Valid range: 2 - 15

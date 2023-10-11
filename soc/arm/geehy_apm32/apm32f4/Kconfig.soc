@@ -1,0 +1,33 @@
+# Copyright (c) 2023, Quincy.W <wangqyfm@foxmail.com>
+# SPDX-License-Identifier: Apache-2.0
+
+choice
+	prompt "APM32F4x MCU Selection"
+	depends on SOC_SERIES_APM32F4X
+
+config SOC_APM32F405XG
+	# 1024KB Flash, 194+4KB SRAM
+	bool "APM32F405XG"
+
+config SOC_APM32F407XE
+	# 512KB Flash, 194+4KB SRAM
+	bool "APM32F407XE"
+
+config SOC_APM32F407XG
+	# 1024KB Flash, 194+4KB SRAM
+	bool "APM32F407XG"
+
+config SOC_APM32F411XC
+	# 256KB Flash, 128KB SRAM
+	bool "APM32F411XC"
+	
+config SOC_APM32F411XE
+	# 512KB Flash, 128KB SRAM
+	bool "APM32F411XE"
+
+config SOC_APM32F417XG
+	# 1024KB Flash, 194+4KB SRAM
+	bool "APM32F417XG"
+
+endchoice
+

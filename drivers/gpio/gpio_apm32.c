@@ -9,9 +9,7 @@
 #include <zephyr/drivers/gpio.h>
 #include <zephyr/drivers/gpio/gpio_utils.h>
 
-#include <apm32f10x_eint.h>
-#include <apm32f10x_gpio.h>
-#include <apm32f10x_rcm.h>
+#include <apm32f_hal.h>
 
 /**
  * @brief Common GPIO driver for APM32 MCUs.
@@ -518,11 +516,11 @@ static int gpio_apm32_port_set_bits_raw(const struct device *dev, gpio_port_pins
 	const struct gpio_apm32_config *cfg = dev->config;
 	GPIO_T *gpio = (GPIO_T *)cfg->base;
 
-	/*
-	 * On F1 series, using LL API requires a costly pin mask translation.
-	 * Skip it and use CMSIS API directly. Valid also on other series.
-	 */
+#ifdef CONFIG_SOC_SERIES_APM32F1X
 	WRITE_REG(gpio->BSC, pins);
+#else
+	WRITE_REG(gpio->BSCL, pins);
+#endif /* #ifdef CONFIG_SOC_SERIES_APM32F1X */
 
 	return 0;
 }
@@ -533,14 +531,9 @@ static int gpio_apm32_port_clear_bits_raw(const struct device *dev, gpio_port_pi
 	GPIO_T *gpio = (GPIO_T *)cfg->base;
 
 #ifdef CONFIG_SOC_SERIES_APM32F1X
-	/*
-	 * On F1 series, using LL API requires a costly pin mask translation.
-	 * Skip it and use CMSIS API directly.
-	 */
 	WRITE_REG(gpio->BC, pins);
 #else
-	/* On other series, LL abstraction is needed  */
-	LL_GPIO_ResetOutputPin(gpio, pins);
+	WRITE_REG(gpio->BSCH, pins);
 #endif
 
 	return 0;
@@ -608,7 +601,12 @@ static int gpio_apm32_pin_configure(const struct device *dev, gpio_pin_t pin, gp
 		{
 			if (flags & GPIO_LINE_OPEN_DRAIN)
 			{
+#ifdef CONFIG_SOC_SERIES_APM32F1X
 				gpio_config.mode = GPIO_MODE_OUT_OD;
+#else
+				gpio_config.mode = GPIO_MODE_OUT;
+				gpio_config.otype = GPIO_OTYPE_OD;
+#endif /* #ifdef CONFIG_SOC_SERIES_APM32F1X */
 			}
 			else
 			{
@@ -618,7 +616,12 @@ static int gpio_apm32_pin_configure(const struct device *dev, gpio_pin_t pin, gp
 		}
 		else
 		{
+#ifdef CONFIG_SOC_SERIES_APM32F1X
 			gpio_config.mode = GPIO_MODE_OUT_PP;
+#else
+				gpio_config.mode = GPIO_MODE_OUT;
+				gpio_config.otype = GPIO_OTYPE_PP;
+#endif /* #ifdef CONFIG_SOC_SERIES_APM32F1X */
 		}
 
 		if ((flags & GPIO_PULL_UP) != 0)
@@ -634,20 +637,39 @@ static int gpio_apm32_pin_configure(const struct device *dev, gpio_pin_t pin, gp
 	{
 		if ((flags & GPIO_PULL_UP) != 0)
 		{
+#ifdef CONFIG_SOC_SERIES_APM32F1X
 			gpio_config.mode = GPIO_MODE_IN_PU;
+#else
+            gpio_config.mode = GPIO_MODE_IN;
+            gpio_config.pupd = GPIO_PUPD_UP;
+#endif /* #ifdef CONFIG_SOC_SERIES_APM32F1X */
 		}
 		else if ((flags & GPIO_PULL_DOWN) != 0)
 		{
-			gpio_config.mode = GPIO_MODE_IN_PD;
+#ifdef CONFIG_SOC_SERIES_APM32F1X
+			gpio_config.mode = GPIO_MODE_IN_PU;
+#else
+            gpio_config.mode = GPIO_MODE_IN;
+            gpio_config.pupd = GPIO_PUPD_DOWN;
+#endif /* #ifdef CONFIG_SOC_SERIES_APM32F1X */
 		}
 		else
 		{
-			gpio_config.mode = GPIO_MODE_IN_FLOATING;
+#ifdef CONFIG_SOC_SERIES_APM32F1X
+			gpio_config.mode = GPIO_MODE_IN_PU;
+#else
+            gpio_config.mode = GPIO_MODE_IN;
+            gpio_config.pupd = GPIO_PUPD_NOPULL;
+#endif /* #ifdef CONFIG_SOC_SERIES_APM32F1X */
 		}
 	}
 	else
 	{
+#ifdef CONFIG_SOC_SERIES_APM32F1X
 		gpio_config.mode = GPIO_MODE_ANALOG;
+#else
+        gpio_config.mode = GPIO_MODE_AN;
+#endif /* #ifdef CONFIG_SOC_SERIES_APM32F1X */
 	}
 
 	if ((flags & GPIO_OUTPUT) != 0)
@@ -663,7 +685,11 @@ static int gpio_apm32_pin_configure(const struct device *dev, gpio_pin_t pin, gp
 	}
 
 	gpio_config.pin = 1 << pin;
+#ifdef CONFIG_SOC_SERIES_APM32F1X
 	gpio_config.speed = GPIO_SPEED_10MHz;
+#else
+    gpio_config.speed = GPIO_SPEED_25MHz;
+#endif /* #ifdef CONFIG_SOC_SERIES_APM32F1X */
 
 	GPIO_Config(gpio, &gpio_config);
 

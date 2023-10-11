@@ -1,0 +1,10 @@
+# apm32f411vc_mini
+# Copyright (c) 2023, Quincy.W <wangqyfm@foxmail.com>
+# SPDX-License-Identifier: Apache-2.0
+
+if BOARD_APM32F411VC_MINI
+
+config BOARD
+	default "apm32f411vc_mini"
+
+endif # BOARD_APM32F411VC_MINI

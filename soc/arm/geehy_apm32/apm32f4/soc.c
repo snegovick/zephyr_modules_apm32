@@ -16,7 +16,7 @@
  *
  * @return 0
  */
-static int apm32f1_init(void)
+static int apm32f4_init(void)
 {
 	// uint32_t key = irq_lock();
 	
@@ -29,4 +29,4 @@ static int apm32f1_init(void)
 	return 0;
 }
 
-SYS_INIT(apm32f1_init, PRE_KERNEL_1, 0);
+SYS_INIT(apm32f4_init, PRE_KERNEL_1, 0);

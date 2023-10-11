@@ -1,0 +1,22 @@
+/*
+ * Copyright (c) 2023, Quincy.W <wangqyfm@foxmail.com>
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+#include <geehy/f4/apm32f401.dtsi>
+
+/ {
+	soc {
+		compatible = "geehy,apm32f411", "geehy,apm32f4", "simple-bus";
+
+		spi5: spi@40015000 {
+			compatible = "geehy,apm32-spi";
+			#address-cells = <1>;
+			#size-cells = <0>;
+			reg = <0x40015000 0x400>;
+			clocks = <&rcm APM32_CLOCK_SPI5>;
+			interrupts = <85 5>;
+			status = "disabled";
+		};
+	};
+};

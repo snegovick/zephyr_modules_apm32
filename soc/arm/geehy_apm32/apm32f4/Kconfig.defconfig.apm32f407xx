@@ -1,0 +1,12 @@
+# Copyright (c) 2023, Quincy.W <wangqyfm@foxmail.com>
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_APM32F407XE || SOC_APM32F407XG
+
+config SOC
+	default "apm32f407xx"
+
+config NUM_IRQS
+	default 85
+
+endif # SOC_APM32F407XE || SOC_APM32F407XG

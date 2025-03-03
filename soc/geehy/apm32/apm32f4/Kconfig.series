@@ -1,8 +1,9 @@
 # Copyright (c) 2023, Quincy.W <wangqyfm@foxmail.com>
+# Copyright (c) 2025, Excave.ru
 # SPDX-License-Identifier: Apache-2.0
 
 config SOC_SERIES_APM32F4X
-	bool "APM32F1x Series MCU"
+	bool "APM32F4x Series MCU"
 	select ARM
 	select CPU_CORTEX_M4
 	select CPU_CORTEX_M_HAS_DWT

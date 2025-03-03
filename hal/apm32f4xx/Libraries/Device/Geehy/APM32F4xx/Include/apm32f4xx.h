@@ -1156,7 +1156,7 @@ typedef struct
             __IOM uint32_t MAXPS      : 11;
             __IM  uint32_t            : 4;
             __IOM uint32_t USBAEP     : 1;
-            __IM  uint32_t EOF        : 1;
+            __IM  uint32_t USBEOF     : 1;
             __IM  uint32_t NAKSTS     : 1;
             __IOM uint32_t EPTYPE     : 2;
             __IM  uint32_t            : 1;
@@ -1247,7 +1247,7 @@ typedef struct
             __IOM uint32_t MAXPS          : 11;
             __IM  uint32_t                : 4;
             __IOM uint32_t USBAEP         : 1;
-            __IM  uint32_t EOF            : 1;
+            __IM  uint32_t USBEOF         : 1;
             __IM  uint32_t NAKSTS         : 1;
             __IOM uint32_t EPTYPE         : 2;
             __IOM uint32_t SNMEN          : 1;

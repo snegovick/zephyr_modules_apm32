@@ -9,8 +9,8 @@
 
 #include <apm32f10x.h>
 
-#include <zephyr/arch/arm/aarch32/cortex_m/cmsis.h>
-#include <zephyr/arch/arm/aarch32/arch.h>
+/* #include <zephyr/arch/arm/aarch32/cortex_m/cmsis.h> */
+/* #include <zephyr/arch/arm/aarch32/arch.h> */
 
 #endif /* !_ASMLANGUAGE */
 

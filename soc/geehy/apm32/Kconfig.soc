@@ -1,0 +1,11 @@
+# Copyright (c) 2023, Quincy.W <wangqyfm@foxmail.com>
+# Copyright (c) 2025, Excave.ru
+# SPDX-License-Identifier: Apache-2.0
+
+config SOC_FAMILY_APM32
+	bool
+
+config SOC_FAMILY
+	default "apm32" if SOC_FAMILY_APM32
+  
+rsource "*/Kconfig.soc"

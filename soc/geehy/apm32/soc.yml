@@ -1,0 +1,13 @@
+family:
+- name: apm32
+  series:
+  - name: apm32f4x
+    socs:
+    - name: apm32f411xx
+    - name: apm32f417xx
+    - name: apm32f407xx
+    - name: apm32f405xx
+  - name: apm32f1x
+    socs:
+    - name: apm32f103xb
+    - name: apm32f103xe

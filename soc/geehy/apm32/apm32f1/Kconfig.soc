@@ -1,5 +1,18 @@
 # Copyright (c) 2023, Quincy.W <wangqyfm@foxmail.com>
+# Copyright (c) 2025, Excave.ru
 # SPDX-License-Identifier: Apache-2.0
+
+config SOC_SERIES_APM32F1X
+	bool "APM32F1x Series MCU"
+	select ARM
+	select CPU_CORTEX_M3
+	select CPU_CORTEX_M_HAS_DWT
+	select SOC_FAMILY_APM32
+	help
+	  Enable support for APM32F1 MCU series
+
+config SOC_SERIES
+	default "apm32f1x" if SOC_SERIES_APM32F1X
 
 choice
 	prompt "APM32F1x MCU Selection"
